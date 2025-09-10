@@ -8,11 +8,11 @@ export const signUp = async (req, res) => {
 
     const existEmail = await User.findOne({ email });
     if (existEmail) {
-      return res.status(400).json({ message: "email already exists!" });
+      return res.status(400).json({ message: "Email already exists!" });
     }
 
     if (password.length < 6) {
-      return res.status(400).json({ message: "password must be 6 characters" });
+      return res.status(400).json({ message: "Password must be 6 characters!" });
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -44,13 +44,13 @@ export const Login = async (req, res) => {
 
     const user = await User.findOne({ email });
     if (!user) {
-      return res.status(400).json({ message: "email does not exists!" });
+      return res.status(400).json({ message: "Email does not exists!" });
     }
 
     const isMatch = await bcrypt.compare(password, user.password);
 
     if (!isMatch) {
-      return res.status(400).json({ message: "incorrect password" });
+      return res.status(400).json({ message: "Incorrect password" });
     }
 
     const token = await getToken(user._id);
