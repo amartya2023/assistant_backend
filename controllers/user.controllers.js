@@ -58,7 +58,7 @@ export const askToAssistant = async (req, res) => {
     const type = gemResult.type;
 
     switch (type) {
-      case "get-date":
+      case "get_date":
         return res.json({
           type,
           userInput: gemResult.userInput,
